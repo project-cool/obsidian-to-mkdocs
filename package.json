@@ -3,8 +3,8 @@
     "start": "tsc && node dist/main.js",
     "server": "tsc -w & nodemon -q -w dist dist/main.js",
     "reset": "cp -a ~/Documents/Obsidian/Obsidian\\ Vault/Notes/ ~/Documents/Projects/notes/docs",
-    "clean-logs": "rm -rf logs",
-    "dev": "npm run reset && npm run clean-logs && npm run server"
+    "clean-logs": "trash logs",
+    "dev": "npm run reset && npm run clean-logs && npm run start || npm run start"
   },
   "devDependencies": {
     "@types/lodash": "^4.14.177",
