@@ -1,8 +1,8 @@
 import fs from "fs";
 import { dirIterator, logger, ObsidianToMkdocsConverter } from "./utils";
 
-// const obsidianFolder = "/Users/arkalim/Documents/Projects/notes/docs";
-const obsidianFolder = "/Users/arkalim/Pictures/Wallpapers/images";
+const obsidianFolder = "/Users/arkalim/Documents/Projects/notes/docs";
+// const obsidianFolder = "/Users/arkalim/Pictures/Wallpapers/images";
 
 // get file paths for all the MD files
 const filePaths = dirIterator(obsidianFolder);
