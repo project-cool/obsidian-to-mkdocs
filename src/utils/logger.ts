@@ -4,10 +4,19 @@ const myFormat = format.printf((format) => {
   return `[${format.timestamp}] [${format.level}]: ${format.message}`;
 });
 
+let consoleLoggerLevel: string = 'info'
+switch(process.argv[3]) { //  console logger level
+  case 'info':
+  case 'debug':
+  case 'error':
+    consoleLoggerLevel = process.argv[3]
+    break;
+}
+
 export const logger = createLogger({
   transports: [
     new transports.Console({
-      level: 'info',
+      level: consoleLoggerLevel,
       format: format.combine(
         format.colorize(),
         format.timestamp({format: 'YYYY-MM-DD HH:mm:ss'}),
@@ -32,3 +41,5 @@ export const logger = createLogger({
     })
   ]
 });
+
+logger.info(`Console logger level: ${consoleLoggerLevel}`)
