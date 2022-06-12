@@ -2,9 +2,9 @@ import fs from "fs";
 import { dirIterator, logger, ObsidianToMkdocsConverter } from "./utils";
 
 // const obsidianFolder = "/Users/arkalim/Documents/Projects/notes/docs";
-const obsidianFolder = process.argv[2] // path argument
+const obsidianFolder = process.argv[2]; // path argument
 
-logger.info(`Obsidian folder path: ${obsidianFolder}`)
+logger.info(`Obsidian folder path: ${obsidianFolder}`);
 
 // get file paths for all the MD files
 const filePaths = dirIterator(obsidianFolder);
@@ -34,4 +34,4 @@ for (const filePath of filePaths) {
   });
 }
 
-logger.info('Compressing images to JPEG')
+logger.info("Compressing images to JPEG");
