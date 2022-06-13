@@ -10,7 +10,16 @@ if [ -z $1 ]; then
 fi
 docsPath=$1
 
-mkdocs build # /app/docs => /app/site
+if [ $2 == "true" ]; then
+    mkdocs build 2> /dev/null # /app/docs => /app/site
+else 
+    mkdocs build
+fi
+
+if [ $? -eq 1 ]; then
+    log "MkDocs failed to build website"
+    exit 1
+fi
 
 rm -rf /app/docs
 
