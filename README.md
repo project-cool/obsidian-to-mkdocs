@@ -1,9 +1,9 @@
 # TODO
 - [x] Image compression 
-- [ ] GitHub Actions
+- [x] GitHub Actions
+- [x] index.md
 - [ ] Admonitions
 - [ ] MkDocs YAML
-- [ ] index.md
 - [ ] Render bullets even if there is no space above or below
 - [ ] 404 error page revamp
 - [ ] frontmatter based filtering of files

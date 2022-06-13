@@ -1,7 +1,11 @@
 #!/bin/bash
 
+log() {
+    echo "[$(date '+%Y-%m-%d %H:%M:%S')] [error]: $1"
+}
+
 if [ -z $1 ]; then
-    echo "Please provide docs path"
+    log "Please provide docs path"
     exit 1
 fi
 docsPath=$1
