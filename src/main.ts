@@ -1,7 +1,6 @@
 import fs from "fs";
 import { dirIterator, logger, ObsidianToMkdocsConverter } from "./utils";
 
-// const obsidianFolder = "/Users/arkalim/Documents/Projects/notes/docs";
 const obsidianFolder = process.argv[2]; // path argument
 
 logger.info(`Obsidian folder path: ${obsidianFolder}`);
