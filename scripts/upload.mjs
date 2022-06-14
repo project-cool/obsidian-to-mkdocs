@@ -23,7 +23,7 @@ import fs from 'fs'
             }
         );
         console.log('Successfully uploaded to Netlify', { responseData: response?.status })
-        console.log(`Site is live at ${response?.data?.ssl_url}`, { data: response?.data })
+        console.log(`Site is live at ${response?.data?.ssl_url}`)
     } catch (error) {
         console.log('Error while uploading to Netlify', { error })
     }
