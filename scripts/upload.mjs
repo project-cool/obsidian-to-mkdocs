@@ -17,7 +17,9 @@ import fs from 'fs'
                 headers: {
                     'Content-Type': 'application/zip',
                     'Authorization': `Bearer ${token}`
-                }
+                },
+                maxContentLength: Infinity,
+                maxBodyLength: Infinity,
             }
         );
         console.log('Status Code of uploading to Netlify', { responseData: response.status })
