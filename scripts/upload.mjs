@@ -22,15 +22,9 @@ import fs from 'fs'
                 maxBodyLength: Infinity,
             }
         );
-        console.log('Status Code of uploading to Netlify', { responseData: response.status })
+        console.log('Successfully uploaded to Netlify', { responseData: response?.status })
+        console.log(`Site is live at ${response?.data?.ssl_url}`, { data: response?.data })
     } catch (error) {
-        console.log('Error while uploading', { error })
-        // if (error.response.status === 401) {
-        //     console.error('Status Code 401: Netlify Token is incorrect')
-        // } else if (error.response.status === 404) {
-        //     console.error('Status Code 404: Site ID is incorrect')
-        // } else {
-        //     console.error('Error while uploading to Netlify', { error: error.response.status });
-        // }
+        console.log('Error while uploading to Netlify', { error })
     }
 })()
