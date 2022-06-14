@@ -22,12 +22,13 @@ import fs from 'fs'
         );
         console.log('Status Code of uploading to Netlify', { responseData: response.status })
     } catch (error) {
-        if (error.response.status === 401) {
-            console.error('Status Code 401: Netlify Token is incorrect')
-        } else if (error.response.status === 404) {
-            console.error('Status Code 404: Site ID is incorrect')
-        } else {
-            console.error('Error while uploading to Netlify', { error: error.response.status });
-        }
+        console.log('Error while uploading', { error })
+        // if (error.response.status === 401) {
+        //     console.error('Status Code 401: Netlify Token is incorrect')
+        // } else if (error.response.status === 404) {
+        //     console.error('Status Code 404: Site ID is incorrect')
+        // } else {
+        //     console.error('Error while uploading to Netlify', { error: error.response.status });
+        // }
     }
 })()
