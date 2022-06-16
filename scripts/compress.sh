@@ -10,7 +10,7 @@ if [ -z $1 ]; then
 fi
 docsPath=$1
 resolution=$2
-pressionQuality=$3
+compressionQuality=$3
 
 find $docsPath -name '*.png' -exec mogrify -resize $resolution -format jpg -quality $compressionQuality\> {} \;
 find $docsPath -name '*.jpg' -exec mogrify -resize $resolution -format jpg -quality $compressionQuality\> {} \;
