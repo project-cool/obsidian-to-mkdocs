@@ -11,6 +11,7 @@ export class ObsidianToMkdocsConverter {
         convertedFile = Cases.fixBacklinkSpacing(convertedFile) // no
         convertedFile = Cases.processImages(convertedFile) // yes
         convertedFile = Cases.processBacklinks(convertedFile) // yes
+        convertedFile = Cases.processAdmonitions(convertedFile) // yes
         return convertedFile;
     }
 }

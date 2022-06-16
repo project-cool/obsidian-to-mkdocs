@@ -141,4 +141,41 @@ export class Cases {
         }
         return newFile;
     }
+
+    /**
+     * > [!tip] This is the tip => ??? tip "This is the tip"
+    */
+    static processAdmonitions = (file: string): string => {
+        let lines = file.split('\n');
+        const admonitionTypeRegex = /\[!(.+)\]/g;
+        const admonitionTitleRegex = /]( |\-|\+) (.+)\n/g;
+        let admonitionStarted = false;
+
+        for (const [index, line] of lines.entries()) {
+            if (line.startsWith('>')) {
+                if (admonitionStarted) {
+                    lines[index] = `\t${line.slice(2)}`
+                    logger.debug(`Replacing: ${line} => \t${line.slice(2)}`)
+                    continue;
+                }
+                const admonitionsType = line.match(admonitionTypeRegex)
+                const admonitionsTitle = `${line}\n`.match(admonitionTitleRegex)
+                if (admonitionsType && admonitionsType.length > 0) {
+                    let admonition = line;
+                    const [admonitionType] = admonitionsType.map((admonition) => admonition.slice(2, -1))
+                    admonition = `??? ${admonitionType}`
+                    if (admonitionsTitle && admonitionsTitle.length > 0) {
+                        const [admonitionTitle] = admonitionsTitle.map((admonition) => admonition.slice(0, -1).split(' ').slice(1).join(' '))
+                        admonition = `${admonition} "${admonitionTitle}"`
+                    }
+                    lines[index] = admonition;
+                    logger.debug(`Replacing: ${line} => ${admonition}`)
+                    admonitionStarted = true;
+                }
+            } else {
+                admonitionStarted = false
+            }
+        }
+        return lines.join('\n');
+    }
 }
