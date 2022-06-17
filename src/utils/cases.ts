@@ -148,7 +148,7 @@ export class Cases {
     static processAdmonitions = (file: string): string => {
         let lines = file.split('\n');
         const admonitionTypeRegex = /\[!(.+)\]/g;
-        const admonitionTitleRegex = /]( |\-|\+) (.+)\n/g;
+        const admonitionTitleRegex = /](|\-|\+) (.+)\n/g;
         let admonitionStarted = false;
 
         for (const [index, line] of lines.entries()) {
