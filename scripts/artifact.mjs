@@ -1,15 +1,65 @@
-import artifact from '@actions/artifact'
+import artifact from "@actions/artifact";
+import fs from "fs";
+import path from "path";
 
-const artifactClient = artifact.create()
-const artifactName = 'logs';
-const files = [
-    '/app/code/logs/dev.log',
-    '/app/code/logs/errors.log',
-]
-const rootDirectory = '/app/code/logs'
-const options = {
-    continueOnError: true
+const artifactClient = artifact.create();
+const logArtifactName = "logs";
+const logFiles = ["/app/code/logs/dev.log", "/app/code/logs/errors.log"];
+const logRootDirectory = "/app/code/logs";
+const logOptions = {
+  continueOnError: true,
+};
+
+const logArtifactUploadResult = await artifactClient.uploadArtifact(
+  logArtifactName,
+  logFiles,
+  logRootDirectory,
+  logOptions
+);
+console.log("Logs Artifact Upload Result", { logArtifactUploadResult });
+
+// Upload converted MD files
+
+const validateFile = (fileName) => {
+  if (fileName.startsWith(".")) {
+    return false;
+  }
+  if (fileName === "attachments") {
+    return false;
+  }
+  return true;
+};
+
+function* getMarkdownPaths(dir) {
+  const files = fs.readdirSync(dir, { withFileTypes: true });
+  for (const file of files) {
+    if (validateFile(file.name)) {
+      if (file.isDirectory()) {
+        yield* getMarkdownPaths(path.join(dir, file.name));
+      } else {
+        yield path.join(dir, file.name);
+      }
+    }
+  }
 }
 
-const artifactUploadResult = await artifactClient.uploadArtifact(artifactName, files, rootDirectory, options)
-console.log('Artifact Upload Result', { artifactUploadResult })
+console.log([
+  ...getMarkdownPaths("/Users/arkalim/Documents/Obsidian/obsidian-vault/Notes"),
+]);
+
+const mdArtifactName = "convertedMdFiles";
+const mdFiles = [...getMarkdownPaths("/app/docs")];
+const mdRootDirectory = "/app/docs/";
+const mdOptions = {
+  continueOnError: true,
+};
+
+const mdArtifactUploadResult = await artifactClient.uploadArtifact(
+  mdArtifactName,
+  mdFiles,
+  mdRootDirectory,
+  mdOptions
+);
+console.log("Converted MD files Artifact Upload Result", {
+  mdArtifactUploadResult,
+});
