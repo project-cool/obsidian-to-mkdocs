@@ -16,7 +16,7 @@ const logArtifactUploadResult = await artifactClient.uploadArtifact(
   logRootDirectory,
   logOptions
 );
-console.log("Logs Artifact Upload Result", { logArtifactUploadResult });
+console.log("Logs Artifact Upload Result");
 
 // Upload converted MD files
 
@@ -56,6 +56,4 @@ const mdArtifactUploadResult = await artifactClient.uploadArtifact(
   mdRootDirectory,
   mdOptions
 );
-console.log("Converted MD files Artifact Upload Result", {
-  mdArtifactUploadResult,
-});
+console.log("Converted MD files Artifact Upload Result");
