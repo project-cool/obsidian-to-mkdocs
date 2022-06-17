@@ -43,10 +43,6 @@ function* getMarkdownPaths(dir) {
   }
 }
 
-console.log([
-  ...getMarkdownPaths("/Users/arkalim/Documents/Obsidian/obsidian-vault/Notes"),
-]);
-
 const mdArtifactName = "convertedMdFiles";
 const mdFiles = [...getMarkdownPaths("/app/docs")];
 const mdRootDirectory = "/app/docs/";
