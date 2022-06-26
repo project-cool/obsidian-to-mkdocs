@@ -15,6 +15,7 @@
   "dependencies": {
     "@actions/artifact": "^1.1.0",
     "axios": "^0.27.2",
+    "front-matter": "^4.0.2",
     "lodash": "^4.17.21",
     "winston": "^3.7.2"
   }

@@ -1,17 +1,38 @@
-import { Cases } from './cases';
-import { Compressor } from './compressor';
-// import { logger } from './logger'
+import fm from "front-matter";
+import { FrontMatter } from "../types";
+import { Cases } from "./cases";
+import { Compressor } from "./compressor";
+import { logger } from "./logger";
 
 export class ObsidianToMkdocsConverter {
-    static convert = (file: string) => {
-        let convertedFile = file;
-        convertedFile = Compressor.changeImageExtension(convertedFile) // no
-        convertedFile = Cases.processBacklinkWithExclamationIfNotImage(convertedFile) // no
-        convertedFile = Cases.fixLinkSpacing(convertedFile) // no
-        convertedFile = Cases.fixBacklinkSpacing(convertedFile) // no
-        convertedFile = Cases.processImages(convertedFile) // yes
-        convertedFile = Cases.processBacklinks(convertedFile) // yes
-        convertedFile = Cases.processAdmonitions(convertedFile) // yes
-        return convertedFile;
+  static convert = (file: string) => {
+    let convertedFile = file;
+    convertedFile = ObsidianToMkdocsConverter.addFrontMatter(convertedFile); // no
+
+    convertedFile = Compressor.changeImageExtension(convertedFile); // no
+    convertedFile =
+      Cases.processBacklinkWithExclamationIfNotImage(convertedFile); // no
+    convertedFile = Cases.fixLinkSpacing(convertedFile); // no
+    convertedFile = Cases.fixBacklinkSpacing(convertedFile); // no
+    convertedFile = Cases.processImages(convertedFile); // yes
+    convertedFile = Cases.processBacklinks(convertedFile); // yes
+    convertedFile = Cases.processAdmonitions(convertedFile); // yes
+    return convertedFile;
+  };
+
+  static addFrontMatter = (file: string) => {
+    const frontMatter = fm(file).attributes as FrontMatter;
+    if (frontMatter.updated) {
+      try {
+        file = `${file}\n\n---\n_Last updated: ${
+          frontMatter.updated.toISOString().split("T")[0]
+        }_`;
+      } catch (error: unknown) {
+        logger.error(
+          `Failed to format last updated date, ${error}, ${frontMatter}`
+        );
+      }
     }
+    return file;
+  };
 }
