@@ -1,5 +1,5 @@
 export interface FrontMatter {
-  created?: Date;
-  updated?: Date;
+  created?: string;
+  updated?: string;
   hidden?: boolean;
 }

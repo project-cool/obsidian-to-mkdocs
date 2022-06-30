@@ -24,9 +24,9 @@ export class ObsidianToMkdocsConverter {
     const frontMatter = fm(file).attributes as FrontMatter;
     if (frontMatter.updated) {
       try {
-        file = `${file}\n\n---\n_Last updated: ${
-          frontMatter.updated.toISOString().split("T")[0]
-        }_`;
+        const updateDate = new Date(String(frontMatter.updated));
+        const lastUpdatedDate = updateDate.toISOString().split("T")[0];
+        file = `${file}\n\n---\n_Last updated: ${lastUpdatedDate}_`;
       } catch (error: unknown) {
         logger.error(
           `Failed to format last updated date, ${error}, ${frontMatter}`
